@@ -13,11 +13,12 @@ I can stop receive email updates from this blog.
 - segment subscribers in multiple audiences
 - track opening and click rates
 
-# Landmines (i guess)
+# Good to knows (i guess)
 - The book claims that `cargo add` is not a default command and you need 
 `cargo-edit` for it. While the crate was useful, in 2026, `cargo add` has been 
 added as a default command. Additionally, `cargo rm` and `cargo upgrade` have 
-also been integrated natively.
+also been integrated natively. Although, there might still be some usecases 
+lurking around as the crate is receiving updates...
 
 - 
 
@@ -40,3 +41,9 @@ modern alternative.
 form the security layer officially maintained by the RustSec team.
 
 [link to sample github actions](https://gist.github.com/LukeMathWalker/5ae1107432ce283310c3e601fac915f3)
+
+5. Separate out the TcpListener and the actual HttpServer. It is easier to 
+setup integration tests that way when you can send random ports into the 
+listener instead of being tied to one.
+
+x. Use `sqlx` as your database client library. 
