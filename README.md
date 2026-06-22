@@ -13,6 +13,14 @@ I can stop receive email updates from this blog.
 - segment subscribers in multiple audiences
 - track opening and click rates
 
+# Landmines (i guess)
+- The book claims that `cargo add` is not a default command and you need 
+`cargo-edit` for it. While the crate was useful, in 2026, `cargo add` has been 
+added as a default command. Additionally, `cargo rm` and `cargo upgrade` have 
+also been integrated natively.
+
+- 
+
 # Tips for Production
 
 1. `cargo watch` is archived and `bacon` seems to be the new actively maintained
