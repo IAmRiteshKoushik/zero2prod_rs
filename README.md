@@ -1,3 +1,18 @@
+# User stories
+
+- As a blog visitor, I want to subscribe to the newsletter, so that I can 
+receive email updates when new content is published on the blog;
+- As a blog author, I want to send an email to all my subscribers, so that I 
+can finally notify them when new content is published
+- As a subscriber, I want to be able to unsubscribe from the newsletter, so that 
+I can stop receive email updates from this blog.
+
+# Features NOT to add
+
+- managing multiple newsletters
+- segment subscribers in multiple audiences
+- track opening and click rates
+
 # Tips for Production
 
 1. `cargo watch` is archived and `bacon` seems to be the new actively maintained
@@ -15,3 +30,5 @@ modern alternative.
 
 4. `cargo-audit` GitHub action along with `cargo-auditable` and `cargo-deny`
 form the security layer officially maintained by the RustSec team.
+
+[link to sample github actions](https://gist.github.com/LukeMathWalker/5ae1107432ce283310c3e601fac915f3)
