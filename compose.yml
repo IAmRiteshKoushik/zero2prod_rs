@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:18.4-alpine3.24
+    container_name: zero2prod_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: newsletter
+    ports:
+      - "5432:5432"
+    restart: on-failure
+    networks:
+      - zero2prod_network
+    volumes:
+      - zero2prod_postgres_data:/var/lib/postgresql/18/data
+
+networks:
+  - zero2prod_network
+
+volumes:
+  zero2prod_postgres_data:
