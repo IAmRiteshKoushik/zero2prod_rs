@@ -46,4 +46,18 @@ form the security layer officially maintained by the RustSec team.
 setup integration tests that way when you can send random ports into the 
 listener instead of being tied to one.
 
-x. Use `sqlx` as your database client library. 
+6. When picking out a crate to interact with the database, there are three top 
+choices in Rust - `tokio-postgres`, `sqlx` and `diesel`(orm). The question is 
+which one to use ? So, when dealing with databases, there are three questions 
+to ask:
+  - compile-time safety
+  - SQL-first or a DSL for query building
+  - async vs sync interface
+
+Now, `tokio-postgres` is the fastest and the most performant implementation, but 
+it does not offer compile-time safety for queries. `sqlx` is the next one in the 
+rankings with more perf overhead but provides compile-time safety.
+
+This being said, I think for most small to medium sized Rust projects, `sqlx` 
+does a perfectly fine job. Unless your database driver is a serious bottleneck 
+there is not much reason to leave it for `tokio-postgres`.
