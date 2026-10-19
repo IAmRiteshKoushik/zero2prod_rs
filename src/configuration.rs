@@ -37,4 +37,12 @@ impl DatabaseSettings {
             self.database_name
         )
     }
+
+    // We can use this to create new DBs, run migrations and tear it down.
+    pub fn connection_string_without_db(&self) -> String {
+        format!(
+            "postgres://{}:{}@{}:{}",
+            self.username, self.password, self.host, self.port
+        )
+    }
 }
