@@ -231,12 +231,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "anyhow"
-version = "1.0.102"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7f202df86484c868dbad7eaa557ef785d5c66295e41b460ef922eca0723b842c"
-
-[[package]]
 name = "arrayvec"
 version = "0.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2936,7 +2930,6 @@ name = "zero2prod_rs"
 version = "0.1.0"
 dependencies = [
  "actix-web",
- "anyhow",
  "chrono",
  "config",
  "env_logger",
@@ -2944,6 +2937,7 @@ dependencies = [
  "serde 1.0.228",
  "sqlx",
  "tokio",
+ "tracing",
  "uuid",
 ]
 
