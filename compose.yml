@@ -15,7 +15,7 @@ services:
       - zero2prod_postgres_data:/var/lib/postgresql/18/data
 
 networks:
-  - zero2prod_network
+  zero2prod_network:
 
 volumes:
   zero2prod_postgres_data:
