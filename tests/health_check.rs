@@ -1,12 +1,16 @@
 use std::net::TcpListener;
 
+use sqlx::{Connection, PgConnection};
+use zero2prod_rs::configuration::get_configuration;
+
 async fn spawn_app() -> String {
     let listener =
         TcpListener::bind("127.0.0.1:0").expect("Failed to bind random port");
 
     // Retrieve the port assigned by the operating system
     let port = listener.local_addr().unwrap().port();
-    let server = zero2prod_rs::run(listener).expect("Failed to bind address");
+    let server =
+        zero2prod_rs::startup::run(listener).expect("Failed to bind address");
     let _ = tokio::spawn(server);
 
     format!("http://127.0.0.1:{}", port)
@@ -51,16 +55,23 @@ async fn subscribe_returns_a_200_for_valid_form_data() {
 
 #[tokio::test]
 async fn subscribe_returns_a_400_when_data_is_missing() {
+    // Setup
     let app_address = spawn_app().await;
+    let configuration =
+        get_configuration().expect("Failed to read configuration");
+    let connection_string = configuration.database.connection_string();
+    let connection = PgConnection::connect(&connection_string)
+        .await
+        .expect("Failed to connect to Postgres.");
     let client = reqwest::Client::new();
-
     let test_cases = vec![
-        ("name=le%20guin", "missing the email"),
-        ("email=ursula_le_guin%40gmail.com", "missing the name"),
+        ("name=le%20guin", "missing the name"),
+        ("email=ursula_le_guin%40gmail.com", "missing the email"),
         ("", "missing both name and email"),
     ];
 
     for (invalid_body, error_message) in test_cases {
+        // Act
         let response = client
             .post(&format!("{}/subscriptions", &app_address))
             .header("Content-Type", "application/x-www-form-urlencoded")
@@ -69,6 +80,7 @@ async fn subscribe_returns_a_400_when_data_is_missing() {
             .await
             .expect("Failed to execute request");
 
+        // Assert
         assert_eq!(
             400,
             response.status(),
