@@ -6,11 +6,11 @@ mod common;
 // For inspection: cargo expand --test health_check (<- name of test file)
 #[tokio::test]
 async fn health_check_works() {
-    let app_address = common::spawn_app().await;
+    let app = common::spawn_app().await;
     let client = reqwest::Client::new();
 
     let response = client
-        .get(&format!("{}/health_check", &app_address))
+        .get(&format!("{}/health_check", &app.address))
         .send()
         .await
         .expect("Failed to execute request.");
